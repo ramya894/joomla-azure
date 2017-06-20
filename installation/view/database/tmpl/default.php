@@ -13,6 +13,10 @@ $connectstr_dbhost = '';
 $connectstr_dbname = '';
 $connectstr_dbusername = '';
 $connectstr_dbpassword = '';
+
+if (isset($_SERVER['MYSQLCONNSTR_localdb']))
+{
+//Windows app service
 foreach ($_SERVER as $key => $value) {
     if (strpos($key, "MYSQLCONNSTR_") !== 0) {
         continue;
@@ -22,6 +26,14 @@ foreach ($_SERVER as $key => $value) {
     $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
     $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
     $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
+   }
+}
+else
+{
+    $connectstr_dbhost = getenv('DATABASE_HOST');
+    $connectstr_dbname = getenv('DATABASE_NAME');;
+    $connectstr_dbusername = getenv('DATABASE_USERNAME');;
+    $connectstr_dbpassword = getenv('DATABASE_PASSWORD');
 }
 
 /* @var InstallationViewDefault $this */
