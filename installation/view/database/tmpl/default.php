@@ -3,26 +3,11 @@
  * @package     Joomla.Installation
  * @subpackage  View
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
-
-$connectstr_dbhost = '';
-$connectstr_dbname = '';
-$connectstr_dbusername = '';
-$connectstr_dbpassword = '';
-foreach ($_SERVER as $key => $value) {
-    if (strpos($key, "MYSQLCONNSTR_") !== 0) {
-        continue;
-    }
-    
-    $connectstr_dbhost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
-}
 
 /* @var InstallationViewDefault $this */
 ?>
@@ -52,7 +37,7 @@ foreach ($_SERVER as $key => $value) {
 			<?php echo $this->form->getLabel('db_host'); ?>
 		</div>
 		<div class="controls">
-			<?php echo $this->form->getInput('db_host',null,$connectstr_dbhost); ?>
+			<?php echo $this->form->getInput('db_host'); ?>
 			<p class="help-block">
 				<?php echo JText::_('INSTL_DATABASE_HOST_DESC'); ?>
 			</p>
@@ -63,7 +48,7 @@ foreach ($_SERVER as $key => $value) {
 			<?php echo $this->form->getLabel('db_user'); ?>
 		</div>
 		<div class="controls">
-			<?php echo $this->form->getInput('db_user',null,$connectstr_dbusername); ?>
+			<?php echo $this->form->getInput('db_user'); ?>
 			<p class="help-block">
 				<?php echo JText::_('INSTL_DATABASE_USER_DESC'); ?>
 			</p>
@@ -75,7 +60,7 @@ foreach ($_SERVER as $key => $value) {
 		</div>
 		<div class="controls">
 			<?php // Disables autocomplete ?> <input type="password" style="display:none">
-			<?php echo $this->form->getInput('db_pass',null,$connectstr_dbpassword); ?>
+			<?php echo $this->form->getInput('db_pass'); ?>
 			<p class="help-block">
 				<?php echo JText::_('INSTL_DATABASE_PASSWORD_DESC'); ?>
 			</p>
@@ -86,7 +71,7 @@ foreach ($_SERVER as $key => $value) {
 			<?php echo $this->form->getLabel('db_name'); ?>
 		</div>
 		<div class="controls">
-			<?php echo $this->form->getInput('db_name',null,$connectstr_dbname); ?>
+			<?php echo $this->form->getInput('db_name'); ?>
 			<p class="help-block">
 				<?php echo JText::_('INSTL_DATABASE_NAME_DESC'); ?>
 			</p>
